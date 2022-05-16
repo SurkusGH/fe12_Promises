@@ -68,7 +68,7 @@ function Async(){
 
 function PizzaWOPineapple(toppings){
     let prom = new Promise((resolve, reject) => {
-        if (toppings != "pineapple") {
+        if (toppings != "pineapple" && !toppings.includes("pineapple") ) {
           resolve(`There you go: pizza with ${toppings}`);
         } else {
           reject(`${toppings}?! Its no longer a pizza!`);
@@ -81,3 +81,27 @@ function PizzaWOPineapple(toppings){
 
 PizzaWOPineapple("Ham")
 PizzaWOPineapple("pineapple")
+
+let tuppleA = ["ham", "peperoni"]
+FunctionallityA = PizzaWOPineapple(tuppleA);
+
+let tuppleB = ["cheese", "pineapple"]
+FunctionallityB = PizzaWOPineapple(tuppleB);
+
+//FunctionallityA..then((data) => console.log(data))
+
+const makePizza = (toppings) => {
+    const pizzaPromise = new Promise((resolve, reject) => {
+      if (toppings.includes('pineapple')) {
+        reject('No pineapples allowed.!');
+      } else {
+        resolve(`Here is your pizza with toppings: ${toppings.join(', ')}`);
+      }
+    })
+    return pizzaPromise;
+  }
+  // const peperoniPizza = makePizza(['pepperoni', 'mushrooms']);
+  const hawaiPizza = makePizza(['pineapple', 'chicken']);
+  hawaiPizza
+    .then((pizza) => console.log(pizza))
+    .catch((err) => console.log(err));
